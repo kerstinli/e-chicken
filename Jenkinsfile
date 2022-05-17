@@ -1,10 +1,11 @@
 node {
     checkout scm
 
-    docker.withRegistry('http://192.168.8.10:5000') {
+    stage 'Pull latest image from private-registry-1'
 
-        docker.image('e-chicken-cinema').inside {
-            sh 'make test'
-        }
+    def image
+    docker.withRegistry('http://192.168.8.10:5000') {
+        image = docker.image('e-chicken-cinema:latest')
+        image.pull()
     }
 }
