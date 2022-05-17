@@ -9,14 +9,26 @@ node {
         image.pull()
     }
 
-    stage ('image build and Push') {
-      steps {
-        sh '''
-            docker build -t e-chicken-cinema:latest .
-            docker push e-chicken-cinema
-            docker run -d -p 1234 e-chicken-cinema
-        '''
-      }
-    }
+    stage 'Push image to private-registry-2'
+
+    // SOLUTION START
+    sh 'docker tag 192.168.8.10:5000/e-chicken-cinema:latest 192.168.8.210:5000/e-chicken-cinema:latest'
+    image = docker.image('192.168.8.210:5000/e-chicken-cinema:latest')
+    // SOLUTION END
+
+    docker.withRegistry('http://192.168.8.210:5000') {
+        image.push()
+    }    
+    
+    
+#    stage ('image build and Push') {
+#      steps {
+#        sh '''
+#            docker build -t e-chicken-cinema:latest .
+#            docker push e-chicken-cinema
+#            docker run -d -p 1234 e-chicken-cinema
+#        '''
+#      }
+#    }
 
 }
