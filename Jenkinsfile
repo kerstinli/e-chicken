@@ -20,15 +20,4 @@ node {
         image.push()
     }    
     
-    
-#    stage ('image build and Push') {
-#      steps {
-#        sh '''
-#            docker build -t e-chicken-cinema:latest .
-#            docker push e-chicken-cinema
-#            docker run -d -p 1234 e-chicken-cinema
-#        '''
-#      }
-#    }
-
 }
