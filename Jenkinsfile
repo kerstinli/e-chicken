@@ -7,6 +7,16 @@ node {
     docker.withRegistry('http://192.168.8.10:5000') {
         image = docker.image('e-chicken-cinema:latest')
         image.pull()
-        image.deploy()        
     }
+
+    stage ('image build and Push') {
+      steps {
+        sh '''
+            docker build -t ${image} .
+            docker push ${image
+            docker run -d -p 1234 ${image}
+        '''
+      }
+    }
+
 }
