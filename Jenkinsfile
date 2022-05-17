@@ -12,9 +12,9 @@ node {
     stage ('image build and Push') {
       steps {
         sh '''
-            docker build -t ${image} .
-            docker push ${image
-            docker run -d -p 1234 ${image}
+            docker build -t e-chicken-cinema:latest .
+            docker push e-chicken-cinema
+            docker run -d -p 1234 e-chicken-cinema
         '''
       }
     }
